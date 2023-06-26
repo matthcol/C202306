@@ -1,0 +1,8 @@
+*.o
+*.obj
+*.exe
+main
+app
+build/
+dist/
+bin/
