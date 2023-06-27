@@ -67,6 +67,7 @@ long long demo_stack(){
 }
 
 void play_with_floats(){
+    // NB: 3 types float, double, long double
     // cas du 1/10e
     float f = 0.1f;
     double d = 0.1;
