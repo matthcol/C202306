@@ -1,5 +1,5 @@
 APP=app
-OBJS = main.o
+OBJS = array.o main.o
 CFLAGS += -g1 -O0
 # LDFLAGS += -lm
 CC = gcc
@@ -12,6 +12,8 @@ $(APP): $(OBJS)
 %.o: %.c
 	$(CC) -c $(CFLAGS) -o $@ $<
 
+main.o: array.h
+array.o: array.h
 
 clean:
 	rm -f $(APP) $(OBJS)
