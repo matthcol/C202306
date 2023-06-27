@@ -39,3 +39,24 @@ void display(double tab[], size_t n)
         printf("%f ", tab[i]);
     }
 }
+
+void display2D(double tab[][N], size_t rows)
+{
+    for (size_t i=0; i < rows; i++) {
+        for (size_t j=0; j < N; j++) {
+            printf("%.2f ", tab[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+void display2Ddyn(double *tab, size_t rows, size_t cols){
+    for (size_t i=0; i < rows; i++) {
+        for (size_t j=0; j < cols; j++) {
+            printf("%.2f ", *(tab + i * cols + j)); // i.e. tab[i][j]
+        }
+        printf("\n");
+    }
+    printf("\n");
+}

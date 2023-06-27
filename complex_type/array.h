@@ -18,4 +18,8 @@ void display(double tab[], size_t n);
 // double sum(double *tab, size_t n);
 // void display(double *tab, size_t n);
 
+// 2D
+void display2D(double tab[][N], size_t rows);
+void display2Ddyn(double *tab, size_t rows, size_t cols);
+
 #endif // !_ARRAY_H
