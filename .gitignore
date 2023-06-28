@@ -3,8 +3,10 @@
 *.exe
 *.a
 *.so
+*.dat
 main
 app
 build/
 dist/
 bin/
+.vscode/

@@ -1,7 +1,7 @@
 APP=app
-OBJS = smartarray.o matrixio.o main.o
+OBJS = main.o
 CFLAGS += -Wall -g1 -O0
-# LDFLAGS += -lm
+LDFLAGS += -lm
 CC = gcc
 
 all: $(APP)
@@ -11,10 +11,6 @@ $(APP): $(OBJS)
 
 %.o: %.c
 	$(CC) -c $(CFLAGS) -o $@ $<
-
-main.o: smartarray.h
-array.o: smartarray.h
-matrixio.o: matrixio.h smartarray.h 
 
 clean:
 	rm -f $(APP) $(OBJS)

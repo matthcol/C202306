@@ -1,7 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdint.h>
 
 #include "smartarray.h"
+#include "matrixio.h"
 
 void play_with_smartmatrix() {
     SmartMatrix_ptr matrix1_ptr = empty(10, 10, C_ORDER | WRITEABLE);
@@ -29,9 +31,31 @@ void play_with_smartmatrix() {
     free(matrix3_ptr);
 }
 
+void play_input_output_matrix(){
+    SmartMatrix_ptr matrix_ptr = full(10, 300, WRITEABLE|C_ORDER, -5.75);
+    display(matrix_ptr);
+    if (save_littleendian(matrix_ptr, "matrix_le.dat")) {
+        printf("Matrix saved (little endian) with success\n");
+    } else {
+        printf("Fail saving matrix\n");
+    }
+     if (save_bigendian(matrix_ptr, "matrix_be.dat")) {
+        printf("Matrix saved (big) endian) with success\n");
+    } else {
+        printf("Fail saving matrix\n");
+    }
+}
 
+void play_endianness(){
+    uint32_t data = 0x123456fa;
+    uint32_t data_out;
+    swap_endianness(&data, &data_out, sizeof(data));
+    printf("data in=%x, out=%x\n", data, data_out);
+}
 
 int main() {
-    play_with_smartmatrix();
+    // play_with_smartmatrix();
+    play_input_output_matrix();
+    // play_endianness();
     return EXIT_SUCCESS;
 }

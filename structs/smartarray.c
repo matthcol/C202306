@@ -13,16 +13,25 @@ const unsigned char WRITEABLE = 0x40;  // 0b01000000
 SmartMatrix_ptr empty(size_t rows, size_t cols, unsigned char flags)
 {
     SmartMatrix_ptr matrix_ptr = malloc(sizeof(SmartMatrix));
+    if (!matrix_ptr) {
+        fprintf(stderr, "Error while allocating matrix struct\n");
+        return matrix_ptr;
+    }
     matrix_ptr->cols = cols;
     matrix_ptr->rows = rows;
     matrix_ptr->flags = flags;
     matrix_ptr->data = malloc(rows*cols*sizeof(double));
+    if (!matrix_ptr->data) {
+        fprintf(stderr, "Error while allocating matrix data\n");
+        return matrix_ptr;
+    }
     return matrix_ptr;
 }
 
 SmartMatrix_ptr zeros(size_t rows, size_t cols, unsigned char flags)
 {
     SmartMatrix_ptr matrix_ptr = empty(rows, cols, flags);
+    if (!matrix_ptr) return matrix_ptr;
     for (size_t i=0; i<rows*cols; i++) matrix_ptr->data[i] = 0.0;
     return matrix_ptr;
 }
@@ -30,6 +39,7 @@ SmartMatrix_ptr zeros(size_t rows, size_t cols, unsigned char flags)
 SmartMatrix_ptr ones(size_t rows, size_t cols, unsigned char flags)
 {
     SmartMatrix_ptr matrix_ptr = empty(rows, cols, flags);
+    if (!matrix_ptr) return matrix_ptr;
     for (size_t i=0; i<rows*cols; i++) matrix_ptr->data[i] = 1.0;
     return matrix_ptr;
 }
@@ -37,8 +47,9 @@ SmartMatrix_ptr ones(size_t rows, size_t cols, unsigned char flags)
 SmartMatrix_ptr full(size_t rows, size_t cols, unsigned char flags, double value)
 {
     SmartMatrix_ptr matrix_ptr = empty(rows, cols, flags);
+    if (!matrix_ptr) return matrix_ptr;
     for (size_t i=0; i<rows*cols; i++) matrix_ptr->data[i] = value;
-    // return matrix_ptr;
+    return matrix_ptr;
 }
 
 void destroy(SmartMatrix_ptr matrix_ptr)
