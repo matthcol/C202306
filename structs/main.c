@@ -1,9 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <math.h>
 
 #include "smartarray.h"
 #include "matrixio.h"
+#include "functional.h"
 
 void play_with_smartmatrix() {
     SmartMatrix_ptr matrix1_ptr = empty(10, 10, C_ORDER | WRITEABLE);
@@ -53,9 +55,28 @@ void play_endianness(){
     printf("data in=%x, out=%x\n", data, data_out);
 }
 
+
+double plus(double d1, double d2){ return d1 + d2;}
+
+double mind(double d1, double d2){ return d1 < d2 ? d1: d2;}
+
+void play_functional_matrix(){
+    SmartMatrix_ptr matrix_ptr = ones(10, 30, WRITEABLE|C_ORDER);
+    set(matrix_ptr, 2, 3, 5.0);
+    set(matrix_ptr, 3, 2, -3.0);    
+    display(matrix_ptr);
+    double s = reduce(matrix_ptr, plus, 0.0);
+    // double s = reduce(matrix_ptr, &plus, 0.0); // puriste du C
+    printf("Somme matrix: %.3f\n", s);
+
+    double m = reduce(matrix_ptr, mind, INFINITY);
+    printf("Min matrix: %.3f\n", m);
+}
+
 int main() {
     // play_with_smartmatrix();
-    play_input_output_matrix();
+    // play_input_output_matrix();
     // play_endianness();
+    play_functional_matrix();
     return EXIT_SUCCESS;
 }
