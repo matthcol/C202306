@@ -1,0 +1,20 @@
+APP=app_medium
+OBJS = main.o 
+CFLAGS += -g1 -O0
+LIBSTATIC = $(HOME)/local/lib/libarray.a
+INCLUDEDIRFLAGS = -I $(HOME)/local/include 
+LDFLAGS += -lm
+CC = gcc
+LD = gcc
+
+all: $(APP)
+
+$(APP): $(OBJS)
+	$(LD) -o $@ $^ $(LIBSTATIC) $(LIBDIRFLAGS) $(LDFLAGS)
+
+%.o: %.c
+	$(CC) -c $(CFLAGS) $(INCLUDEDIRFLAGS) -o $@ $<
+
+clean:
+	rm -f $(APP) $(OBJS)
+
